@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Body Scent - ยาสระผมสมุนไพรธรรมชาติ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>body { font-family: 'Prompt', sans-serif; }</style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+  <!-- Navbar -->
+  <nav class="bg-emerald-800 text-white p-4 shadow-md sticky top-0 z-10">
+    <div class="max-w-5xl mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold tracking-wide">🌿 BODY SCENT</h1>
+      <a href="admin.html" class="bg-emerald-600 hover:bg-emerald-500 px-3 py-1.5 rounded text-sm font-medium transition">
+        📦 ระบบหลังบ้าน (หยิบ/แพ็ค)
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="bg-emerald-900 text-white py-12 px-4 text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-3">ดูแลเส้นผมอย่างล้ำลึกด้วยสารสกัดธรรมชาติ</h2>
+    <p class="text-emerald-200 max-w-xl mx-auto">เลือกสูตรที่ใช่สำหรับสภาพเส้นผมของคุณ ส่งตรงถึงหน้าบ้าน</p>
+  </header>
+
+  <!-- Products Section (2 SKUs) -->
+  <main class="max-w-5xl mx-auto py-10 px-4">
+    <h3 class="text-2xl font-bold text-center mb-8">เลือกสินค้าที่ต้องการ</h3>
+    
+    <div class="grid md:grid-cols-2 gap-8 mb-12">
+      <!-- SKU 01 -->
+      <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden flex flex-col">
+        <img src="./images/shampoo-sku1.jpg" alt="ยาสระผมสูตรอัญชัน" class="w-full h-64 object-cover bg-stone-200">
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded">SKU-001</span>
+            <h4 class="text-xl font-bold mt-2">สูตรอัญชัน & มะกรูด (ลดผมร่วง)</h4>
+            <p class="text-stone-600 text-sm mt-1">ช่วยบำรุงรากผมให้แข็งแรง ลดการขาดหลุดร่วง ปริมาณ 300 ml.</p>
+          </div>
+          <div class="mt-4 pt-4 border-t flex justify-between items-center">
+            <span class="text-2xl font-bold text-emerald-700">฿250</span>
+            <div class="flex items-center gap-2">
+              <label class="text-sm">จำนวน:</label>
+              <input type="number" id="qty-sku1" value="0" min="0" max="50" onchange="calculateTotal()" class="w-16 border rounded px-2 py-1 text-center">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKU 02 -->
+      <div class="bg-white rounded-xl shadow-sm border border-stone-200 overflow-hidden flex flex-col">
+        <img src="./images/shampoo-sku2.jpg" alt="ยาสระผมสูตรน้ำมันมะพร้าว" class="w-full h-64 object-cover bg-stone-200">
+        <div class="p-6 flex-1 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-semibold bg-amber-100 text-amber-800 px-2.5 py-1 rounded">SKU-002</span>
+            <h4 class="text-xl font-bold mt-2">สูตรน้ำมันมะพร้าวสกัดเย็น (ฟื้นฟูผมแห้งเสีย)</h4>
+            <p class="text-stone-600 text-sm mt-1">เติมความชุ่มชื้นให้ผมนุ่มลื่น มีน้ำหนัก ไม่ชี้ฟู ปริมาณ 300 ml.</p>
+          </div>
+          <div class="mt-4 pt-4 border-t flex justify-between items-center">
+            <span class="text-2xl font-bold text-emerald-700">฿290</span>
+            <div class="flex items-center gap-2">
+              <label class="text-sm">จำนวน:</label>
+              <input type="number" id="qty-sku2" value="0" min="0" max="50" onchange="calculateTotal()" class="w-16 border rounded px-2 py-1 text-center">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Order Form -->
+    <div class="bg-white p-6 md:p-8 rounded-xl shadow-md border border-stone-200 max-w-2xl mx-auto">
+      <h3 class="text-xl font-bold mb-4 border-b pb-2">📝 กรอกข้อมูลสั่งซื้อและจัดส่ง</h3>
+      <form id="orderForm" onsubmit="submitOrder(event)" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">ชื่อ-นามสกุล ผู้รับ *</label>
+          <input type="text" id="customerName" required class="w-full border rounded-lg px-3 py-2 focus:outline-emerald-600" placeholder="เช่น สมชาย ใจดี">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">เบอร์โทรศัพท์ / Line ID *</label>
+          <input type="text" id="contact" required class="w-full border rounded-lg px-3 py-2 focus:outline-emerald-600" placeholder="เช่น 081-234-5678">
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">ที่อยู่จัดส่ง (พร้อมรหัสไปรษณีย์) *</label>
+          <textarea id="address" required rows="3" class="w-full border rounded-lg px-3 py-2 focus:outline-emerald-600" placeholder="บ้านเลขที่ ถนน ตำบล อำเภอ จังหวัด รหัสไปรษณีย์"></textarea>
+        </div>
+        <div>
+          <label class="block text-sm font-medium mb-1">หมายเหตุเพิ่มเติม (ถ้ามี)</label>
+          <input type="text" id="note" class="w-full border rounded-lg px-3 py-2 focus:outline-emerald-600" placeholder="เช่น ฝากไว้ที่ป้อมยาม">
+        </div>
+
+        <div class="bg-stone-100 p-4 rounded-lg flex justify-between items-center">
+          <span class="font-medium">ยอดชำระเงินรวมทั้งสิ้น:</span>
+          <span id="totalDisplay" class="text-2xl font-bold text-emerald-700">฿0</span>
+        </div>
+
+        <button type="submit" id="submitBtn" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 rounded-lg transition shadow">
+          ยืนยันการสั่งซื้อ
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkeY7BdDAdQnxLZxN9RkZGXJNFB8CJW7AsEgpyy-jpkHJp_IQY0DEQKsksv4BDVn2T/exec";
+
+    function calculateTotal() {
+      const q1 = parseInt(document.getElementById('qty-sku1').value) || 0;
+      const q2 = parseInt(document.getElementById('qty-sku2').value) || 0;
+      const total = (q1 * 250) + (q2 * 290);
+      document.getElementById('totalDisplay').innerText = `฿${total.toLocaleString()}`;
+      return { q1, q2, total };
+    }
+
+    async function submitOrder(e) {
+      e.preventDefault();
+      const { q1, q2, total } = calculateTotal();
+      
+      if (q1 === 0 && q2 === 0) {
+        alert("กรุณาเลือกจำนวนสินค้าอย่างน้อย 1 ชิ้นครับ");
+        return;
+      }
+
+      const itemsList = [];
+      if (q1 > 0) itemsList.push(`SKU-001 (สูตรอัญชัน) x${q1}`);
+      if (q2 > 0) itemsList.push(`SKU-002 (สูตรมะพร้าว) x${q2}`);
+
+      const payload = {
+        customerName: document.getElementById('customerName').value,
+        contact: document.getElementById('contact').value,
+        address: document.getElementById('address').value,
+        items: itemsList.join(", "),
+        totalPrice: total,
+        note: document.getElementById('note').value
+      };
+
+      const btn = document.getElementById('submitBtn');
+      btn.disabled = true;
+      btn.innerText = "กำลังบันทึกข้อมูล...";
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        alert("✅ สั่งซื้อสำเร็จ! ข้อมูลถูกบันทึกลงระบบเรียบร้อยแล้ว");
+        document.getElementById('orderForm').reset();
+        calculateTotal();
+      } catch (error) {
+        alert("❌ เกิดข้อผิดพลาดในการส่งข้อมูล: " + error);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "ยืนยันการสั่งซื้อ";
+      }
+    }
+  </script>
+</body>
+</html>
